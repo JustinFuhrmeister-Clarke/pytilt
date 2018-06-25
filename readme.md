@@ -29,5 +29,6 @@ The code in blescan-py is adapted from https://github.com/switchdoclabs/iBeacon-
 The Tilt UUID-to-color mapping is taken from: https://github.com/tbryant/brewometer-nodejs
 Systemd-config here: http://www.raspberrypi-spy.co.uk/2015/10/how-to-autorun-a-python-script-on-boot-using-systemd/
 
+Migration to Python3 Justin Fuhrmeister-Clarke 2018
 
 [1]: https://tilthydrometer.com/

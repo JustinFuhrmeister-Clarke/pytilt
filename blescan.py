@@ -1,4 +1,5 @@
 # based on https://github.com/switchdoclabs/iBeacon-Scanner-
+#Migration to Python3 Justin Fuhrmeister-Clarke 2018
 
 import os
 import sys
@@ -35,7 +36,7 @@ def returnnumberpacket(pkt):
     integer = 0
     multiple = 256
     for c in pkt:
-        integer += struct.unpack('B', c)[0] * multiple
+        integer += c * multiple
         multiple = 1
     return integer
 
@@ -43,13 +44,13 @@ def returnnumberpacket(pkt):
 def returnstringpacket(pkt):
     string = ''
     for c in pkt:
-        string += '%02x' % struct.unpack('B', c)[0]
+        string += '%02x' % c
     return string
 
 
 def printpacket(pkt):
     for c in pkt:
-        sys.stdout.write('%02x ' % struct.unpack('B', c)[0])
+        sys.stdout.write('%02x ' % c)
 
 
 def get_packed_bdaddr(bdaddr_string):
@@ -103,12 +104,12 @@ def parse_events(sock, loop_count=100):
         ptype, event, plen = struct.unpack('BBB', pkt[:3])
 
         if event == LE_META_EVENT:
-            subevent, = struct.unpack('B', pkt[3])
+            subevent = pkt[3]
             pkt = pkt[4:]
             if subevent == EVT_LE_CONN_COMPLETE:
                 le_handle_connection_complete(pkt)
             elif subevent == EVT_LE_ADVERTISING_REPORT:
-                num_reports = struct.unpack('B', pkt[0])[0]
+                num_reports = pkt[0]
                 report_pkt_offset = 0
                 for i in range(0, num_reports):
                     beacons.append({

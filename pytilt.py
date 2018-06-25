@@ -1,3 +1,4 @@
+#Migration to Python3 Justin Fuhrmeister-Clarke 2018
 import sys
 import datetime
 import time
@@ -24,6 +25,8 @@ def distinct(objects):
     seen = set()
     unique = []
     for obj in objects:
+        #print(type(obj))
+        #print(obj)
         if obj['uuid'] not in seen:
             unique.append(obj)
             seen.add(obj['uuid'])
@@ -53,9 +56,9 @@ if __name__ == '__main__':
     dev_id = 0
     try:
         sock = bluez.hci_open_dev(dev_id)
-        print 'Starting pytilt logger'
+        print('Starting pytilt logger')
     except:
-        print 'error accessing bluetooth device...'
+        print('error accessing bluetooth device...')
         sys.exit(1)
 
     blescan.hci_le_set_scan_parameters(sock)

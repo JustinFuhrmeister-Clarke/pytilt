@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#Migration to Python3 Justin Fuhrmeister-Clarke 2018
 import requests
 import json
 from multiprocessing import Pool
@@ -7,7 +8,7 @@ import os
 
 
 def send(data, url, key):
-    print 'send', data
+    print('send: {}'.format(data))
     try:
         headers = {'Content-type': 'application/json', 'Accept': 'text/plain', 'X-PYTILT-KEY': key}
         r = requests.post(url, data=json.dumps(data), headers=headers)
@@ -42,7 +43,7 @@ class Sender(object):
         if was_sent:
             self.sending = []
         else:
-            print 'send failed'
+            print('send failed')
             if len(self.queue) > 100:
                 self.queue = []
             self.queue += self.sending
